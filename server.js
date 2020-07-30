@@ -14,7 +14,7 @@ const db = require('./config/keys').mongoURI;
 
 // Connect to mongo
 mongoose
-    .connect(db)
+    .connect(process.env.MONGO_URI || db)
     .then(() => console.log('MongoDB connected...'))
     .catch(err => console.log(err));
 
@@ -24,7 +24,7 @@ app.use('/api/items', items);
 // Serve static assets if in production
 if(process.env.NODE_ENV === 'production') {
     // Set static folder
-    app.use('/', express.static(path.join('client/build')));
+    app.use(express.static(path.join('client/build')));
    
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
