@@ -77,6 +77,8 @@ class LoginModal extends Component {
   };
 
   render() {
+    const { auth } = this.props;
+    console.log(auth);
     return (
       <div>
         <NavLink onClick={this.toggle} href="#">
@@ -123,6 +125,7 @@ class LoginModal extends Component {
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
   error: state.error,
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, { login, clearErrors })(LoginModal);
